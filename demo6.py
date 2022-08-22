@@ -33,7 +33,7 @@ def transform_data(stock_df):
 @task
 def save_data(stock_df, ticker):
     """Save the transformed data and return success message"""
-    stock_df.to_csv(f"{ticker}_moving_average_{today}.csv")
+    stock_df.to_csv(f"{ticker}_moving_avg_{today}.csv")
     return "success"
 
 
@@ -47,6 +47,7 @@ def pipeline(ticker: str):
     transformed_data = transform_data(stock_data)
     save_data_result = save_data(stock_df=transformed_data, ticker=ticker)
     print(save_data_result)
+
     # Access the stored secret
     print(secret_block.get())
 
