@@ -26,7 +26,7 @@ def transform_data(stock_df):
 
 def save_data(stock_df, ticker):
     """Save the transformed data and return success message"""
-    stock_df.to_csv(f"{ticker}_moving_average_{date.today().isoformat()}")
+    stock_df.to_csv(f"{ticker}_moving_average_{today}.csv")
     return "success"
 
 

@@ -4,9 +4,9 @@ import pandas as pd
 import yfinance as yf
 from prefect import flow, task
 from prefect.tasks import task_input_hash
-from prefect.blocks.system import Secret
+from prefect.blocks.notifications import SlackWebhook
 
-# adds Slack webhook
+# adds Slack webhook, removes Secret
 
 today = date.today().isoformat()
 
@@ -33,21 +33,21 @@ def transform_data(stock_df):
 @task
 def save_data(stock_df, ticker):
     """Save the transformed data and return success message"""
-    stock_df.to_csv(f"{ticker}_moving_average_{today}")
+    stock_df.to_csv(f"{ticker}_moving_average_{today}.csv")
     return "success"
 
 
 @flow
 def pipeline(ticker: str):
     # using a secret
-    secret_block = Secret.load("secretapikey")
 
     """Main pipeline"""
     stock_data = fetch_data(ticker)
     transformed_data = transform_data(stock_data)
     save_data_result = save_data(stock_df=transformed_data, ticker=ticker)
-    if save_data_result != 'success':
-
+    if save_data_result != "success":
+        slack_webhook_block = SlackWebhook.load("message-jeff")
+        slack_webhook_block.notify(f"Your pipeline for {ticker} ran successfully! 🚀")
 
 
 if __name__ == "__main__":
@@ -56,3 +56,4 @@ if __name__ == "__main__":
 # prefect deployment apply (until one step)
 # run manually from gui
 # observe in gui
+# observe in Slack

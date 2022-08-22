@@ -6,6 +6,8 @@ from prefect import flow, task
 
 # adds retries
 
+today = date.today().isoformat()
+
 @task(retries=5, retry_delay_seconds=2)
 def fetch_data(ticker="AAPL"):
     """Fetch stock data for past month from buggy api"""
@@ -26,7 +28,7 @@ def transform_data(stock_df):
 @task
 def save_data(stock_df, ticker):
     """Save the transformed data and return success message"""
-    stock_df.to_csv(f"{ticker}_moving_average_{date.today().isoformat()}")
+    stock_df.to_csv(f"{ticker}_moving_average_{today}.csv")
     return "success"
 
 @flow

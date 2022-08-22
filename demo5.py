@@ -32,7 +32,7 @@ def transform_data(stock_df):
 @task
 def save_data(stock_df, ticker):
     """Save the transformed data and return success message"""
-    stock_df.to_csv(f"{ticker}_moving_average_{today}")
+    stock_df.to_csv(f"{ticker}_moving_average_{today}.csv")
     return "success"
 
 
