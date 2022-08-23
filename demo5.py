@@ -46,15 +46,16 @@ def pipeline(ticker: str):
 
 
 if __name__ == "__main__":
-    pipeline(ticker="MSFT")
+    pipeline(ticker="ZOOM")
 
 # Create a Deployment
-# prefect deployment build
+# prefect deployment build demo5.py:pipeline -n pipe
 # see deployment.yaml
 # move to Cloud UI, signup, grab api key and login from CLI
 # I'll just switch from one prefect profile to another, local to cloud
-# prefect deployment apply (until one step)
+# refect deployment apply pipeline-deployment.yaml
 # prefect agent start
 # run manually from gui
+# add parameter
 # observe in gui
 # schedule in gui

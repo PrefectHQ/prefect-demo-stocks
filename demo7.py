@@ -45,15 +45,18 @@ def pipeline(ticker: str):
     stock_data = fetch_data(ticker)
     transformed_data = transform_data(stock_data)
     save_data_result = save_data(stock_df=transformed_data, ticker=ticker)
-    if save_data_result != "success":
-        slack_webhook_block = SlackWebhook.load("message-jeff")
-        slack_webhook_block.notify(f"Your pipeline for {ticker} ran successfully! 🚀")
+    if save_data_result == "success":
+        slack_webhook_block = SlackWebhook.load("msg-jeff")
+        slack_webhook_block.notify(f"Your pipeline for {ticker} ran successfully!")
 
 
 if __name__ == "__main__":
     pipeline(ticker="AAPL")
 
-# prefect deployment apply (until one step)
-# run manually from gui
+
+# add slack block in gui
+# prefect deployment build demo7.py:pipeline -n slack -o "slack-deployment.yaml"
+# prefect deployment apply slack-deployment.yaml
+# run manually from gui - make sure has a param for the ticker
 # observe in gui
 # observe in Slack

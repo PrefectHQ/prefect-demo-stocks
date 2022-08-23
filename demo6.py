@@ -55,6 +55,7 @@ def pipeline(ticker: str):
 if __name__ == "__main__":
     pipeline(ticker="AAPL")
 
-# prefect deployment apply (until one step)
+# prefect deployment build
+# prefect deployment apply
 # run manually from gui
 # observe in gui
