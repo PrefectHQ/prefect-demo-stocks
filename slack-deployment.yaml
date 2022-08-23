@@ -7,10 +7,16 @@ version: 889b3ddcef439990ebaa08752e939087
 # The work queue that will handle this deployment's runs
 work_queue_name: slack
 tags: []
-parameters: 
+parameters:
   ticker: AAPL
 schedule: null
 infra_overrides: {}
+
+###
+### DO NOT EDIT BELOW THIS LINE
+###
+flow_name: pipeline
+manifest_path: null
 infrastructure:
   type: process
   env: {}
@@ -21,12 +27,9 @@ infrastructure:
   - -m
   - prefect.engine
   stream_output: true
-
-###
-### DO NOT EDIT BELOW THIS LINE
-###
-flow_name: pipeline
-manifest_path: null
+  _block_document_id: 0bff35d0-1415-42ab-b194-e9f5c3590449
+  _block_document_name: anonymous-fd262f28-f6e0-429e-8492-f9b9885bc593
+  _is_anonymous: true
 storage: null
 path: /Users/jeffhale/Desktop/prefect/demo
 entrypoint: demo7.py:pipeline

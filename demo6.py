@@ -39,10 +39,11 @@ def save_data(stock_df, ticker):
 
 @flow
 def pipeline(ticker: str):
+    """Main pipeline"""
+
     # using a secret
     secret_block = Secret.load("secretapikey")
-
-    """Main pipeline"""
+    
     stock_data = fetch_data(ticker)
     transformed_data = transform_data(stock_data)
     save_data_result = save_data(stock_df=transformed_data, ticker=ticker)

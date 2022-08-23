@@ -39,8 +39,6 @@ def save_data(stock_df, ticker):
 
 @flow
 def pipeline(ticker: str):
-    # using a secret
-
     """Main pipeline"""
     stock_data = fetch_data(ticker)
     transformed_data = transform_data(stock_data)
